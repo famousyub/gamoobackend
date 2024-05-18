@@ -9,6 +9,7 @@ import tn.rns.gmao.dto.*;
 import tn.rns.gmao.model.BusinessOwner;
 import tn.rns.gmao.model.Family;
 import tn.rns.gmao.model.Intervention;
+import tn.rns.gmao.model.InterventionEntity;
 import tn.rns.gmao.model.entities.UserEntity;
 import tn.rns.gmao.repository.*;
 import tn.rns.gmao.services.*;
@@ -42,7 +43,7 @@ public class TechnicienOwnerController {
     private MarqueRepository marqueRepository;
 
     @Autowired
-    private InterventionRepository interventionRepository;
+    private InterventionentityRepository interventionRepository;
 
     @Autowired
     private FamilyService familyService ;
@@ -58,9 +59,9 @@ public class TechnicienOwnerController {
 
     @PostMapping("/add/intervention")
 
-    public  ResponseEntity<?> createInervention(@RequestBody InterventionDto interventionDto)
+    public  ResponseEntity<?> createInervention(@RequestBody InterventionEntityDto interventionDto)
     {
-        Intervention  interventi_  =InterventionDto.toEntity(interventionDto);
+        InterventionEntity interventi_  =InterventionEntityDto.toEntity(interventionDto);
 
         interventionRepository.save(interventi_);
 
@@ -72,7 +73,7 @@ public class TechnicienOwnerController {
     public  ResponseEntity<?> alllintervention()
     {
 
-        List<Intervention> allintervention  = interventionRepository.findAll();
+        List<InterventionEntity> allintervention  = interventionRepository.findAll();
         return  ResponseEntity.ok().body(allintervention);
     }
     @PostMapping("/add/family")
